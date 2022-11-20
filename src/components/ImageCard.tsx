@@ -1,14 +1,14 @@
-import Image, {StaticImageData} from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import React, {FC} from "react";
 
 interface ImageCardProps {
-  src: StaticImageData;
+  src: string;
 }
 
 export const ImageCard: FC<ImageCardProps> = ({src}) => {
   return (
     <div className="relative max-w-xs mb-5 overflow-hidden rounded-2xl">
-      <Image alt="A random image" sizes="100vw" src={src} />
+      <img alt="" src={src} />
     </div>
   );
 };
