@@ -1,7 +1,6 @@
 import type {NextPage} from "next";
 
 import {useQuery} from "@tanstack/react-query";
-import {useEffect, useState} from "react";
 
 import {ImageCard} from "@/components";
 
