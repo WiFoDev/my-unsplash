@@ -17,16 +17,16 @@ export const Layout = ({children}: LayoutProps) => {
         <meta content="The next unsplash app" name="My Unsplash" />
         <link href="/favicon.ico" rel="icon" />
       </Head>
-      <header className="sticky top-0 z-20 w-full">
+      <header className="sticky top-0 z-20 w-full bg-white/80 backdrop-blur-sm">
         <nav className="flex h-16 mx-auto max-w-screen-standar items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
           <div className="flex items-center gap-4 mr-auto">
             <Image alt="My unsplash logo" src={unsplashLogo} />
-            <label className="flex items-center gap-2 border-[1px] border-secondary p-3 text-xs rounded-md">
+            <label className="flex items-center gap-2 border-[1px] border-background p-3 text-xs rounded-md">
               <div className="w-4 h-4">
                 <Image alt="Search Icon" src={searchIcon} />
               </div>
               <input
-                className="outline-none"
+                className="bg-transparent outline-none"
                 placeholder="Search by name"
                 type="text"
               />
