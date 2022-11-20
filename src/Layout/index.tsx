@@ -37,9 +37,7 @@ export const Layout = ({children}: LayoutProps) => {
           </button>
         </nav>
       </header>
-      <main className="relative flex flex-col items-center justify-center w-full h-full">
-        {children}
-      </main>
+      <main className="relative w-full h-full">{children}</main>
       <footer className="relative pb-[env(safe-area-inset-bottom)]">
         <div className="mx-auto max-w-screen-standar py-12 flex justify-center pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
           Here is the footer section
