@@ -1,15 +1,18 @@
 import Head from "next/head";
 import Image from "next/image";
-import React from "react";
+import React, {useState} from "react";
 
 import unsplashLogo from "@/assets/my_unsplash_logo.svg";
 import searchIcon from "@/assets/search-icon.svg";
+import {Modal} from "@/components";
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 export const Layout = ({children}: LayoutProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="flex flex-col justify-between min-h-screen">
       <Head>
@@ -32,9 +35,13 @@ export const Layout = ({children}: LayoutProps) => {
               />
             </label>
           </div>
-          <button className="px-4 py-3 text-sm font-semibold text-white rounded-lg shadow-md shadow-primary/50 bg-primary">
+          <button
+            className="px-4 py-3 text-sm font-semibold text-white rounded-lg shadow-md shadow-primary/50 bg-primary"
+            onClick={() => setIsModalOpen(true)}
+          >
             Add a photo
           </button>
+          {isModalOpen && <Modal />}
         </nav>
       </header>
       <main className="relative flex-1 w-full h-full pt-6">
