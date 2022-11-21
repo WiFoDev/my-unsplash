@@ -15,9 +15,15 @@ export const Modal: FC<ModalProps> = ({setModalOpenState}) => {
     setModalOpenState(false);
   };
 
-  const handleSubmition: React.FormEventHandler = (e) => {
+  const handleSubmition: React.FormEventHandler = async (e) => {
     e.preventDefault();
-    console.log({label, photoURL});
+    const data = await fetch("http://localhost:3000/api/upload", {
+      method: "POST",
+      body: JSON.stringify({label, photoURL}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   return (
