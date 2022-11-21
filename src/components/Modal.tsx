@@ -7,6 +7,9 @@ interface ModalProps {
 }
 
 export const Modal: FC<ModalProps> = ({setModalOpenState}) => {
+  const [label, setLabel] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+
   const handleCancel: React.MouseEventHandler = (e) => {
     e.preventDefault();
     setModalOpenState(false);
@@ -14,7 +17,7 @@ export const Modal: FC<ModalProps> = ({setModalOpenState}) => {
 
   const handleSubmition: React.FormEventHandler = (e) => {
     e.preventDefault();
-    console.log("Sending...");
+    console.log({label, photoURL});
   };
 
   return (
@@ -32,6 +35,10 @@ export const Modal: FC<ModalProps> = ({setModalOpenState}) => {
                 className="w-full outline-none p-3 border-[1px] border-secondary rounded-lg"
                 placeholder="Food"
                 type="text"
+                value={label}
+                onChange={(e) => {
+                  setLabel(e.target.value);
+                }}
               />
             </label>
             <label className="flex flex-col gap-2 text-sm">
@@ -40,6 +47,8 @@ export const Modal: FC<ModalProps> = ({setModalOpenState}) => {
                 className="w-full outline-none p-3 border-[1px] border-secondary rounded-lg"
                 placeholder="https://images.unsplash.com/photo-1668889495..."
                 type="text"
+                value={photoURL}
+                onChange={(e) => setPhotoURL(e.target.value)}
               />
             </label>
             <div className="flex gap-4 mt-4 place-self-end">
