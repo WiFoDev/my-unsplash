@@ -41,7 +41,9 @@ export const Layout = ({children}: LayoutProps) => {
           >
             Add a photo
           </button>
-          {isModalOpen && <Modal />}
+          {isModalOpen && (
+            <Modal setModalOpenState={setIsModalOpen} />
+          )}
         </nav>
       </header>
       <main className="relative flex-1 w-full h-full pt-6">
