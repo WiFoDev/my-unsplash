@@ -7,6 +7,10 @@ export const getImages = async (): Promise<ImageTypes[]> => {
 };
 
 interface ImageTypes {
-  secure_url: string;
   asset_id: string;
+  public_id: string;
+  folder: string;
+  url: string;
+  secure_url: string;
+  tags: string[];
 }

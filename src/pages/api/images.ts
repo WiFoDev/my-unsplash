@@ -17,6 +17,7 @@ type Resource = {
   folder: string;
   url: string;
   secure_url: string;
+  tags: string[];
 };
 
 cloudinary.config({
@@ -34,6 +35,7 @@ export default async function handler(
     type: "upload",
     prefix: "my-unsplash",
     max_results: 500,
+    tags: true,
   };
   const {resources} = await cloudinary.api.resources(options);
 
