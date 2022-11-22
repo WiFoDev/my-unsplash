@@ -14,7 +14,7 @@ export const ImageCard: FC<ImageCardProps> = ({src, tags}) => {
 
   return (
     <div
-      className="relative max-w-xs mb-6 overflow-hidden transition-all duration-300 rounded-2xl hover:scale-110"
+      className="relative max-w-xs mb-6 overflow-hidden transition-all duration-500 rounded-2xl hover:scale-110"
       onMouseEnter={() => setLabelOpen(true)}
       onMouseLeave={() => setLabelOpen(false)}
     >
@@ -30,7 +30,7 @@ export const ImageCard: FC<ImageCardProps> = ({src, tags}) => {
               />
             </div>
           </div>
-          <ul className="absolute bottom-0 w-full p-3 bg-black/30 backdrop-blur-md">
+          <ul className="absolute bottom-0 w-full p-3 pointer-events-none bg-black/30 backdrop-blur-md">
             {tags.map((tag, index) => (
               <li
                 key={index}
