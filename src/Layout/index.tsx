@@ -1,10 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
 import React, {useState} from "react";
+import {useAtom} from "jotai";
 
 import unsplashLogo from "@/assets/my_unsplash_logo.svg";
 import searchIcon from "@/assets/search-icon.svg";
 import {Modal} from "@/components";
+import {tagAtom} from "@/pages/_app";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -13,11 +15,12 @@ type LayoutProps = {
 export const Layout = ({children}: LayoutProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [label, setLabel] = useState("");
+  const [_, setTag] = useAtom(tagAtom);
 
   const handleSubmition: React.FormEventHandler = (e) => {
     e.preventDefault();
-    if (label.trim().length === 0) return;
-    console.log(label);
+    if (label.trim().length !== label.length) return;
+    setTag(label);
   };
 
   return (

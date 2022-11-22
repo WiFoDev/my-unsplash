@@ -6,7 +6,7 @@ export const getImages = async (): Promise<ImageTypes[]> => {
   return results;
 };
 
-interface ImageTypes {
+export interface ImageTypes {
   asset_id: string;
   public_id: string;
   folder: string;

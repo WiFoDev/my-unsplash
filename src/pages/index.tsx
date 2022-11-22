@@ -1,10 +1,19 @@
 import type {NextPage} from "next";
 
+import {useAtom} from "jotai";
+
 import {ImageCard} from "@/components";
 import {useImageQuery} from "@/Hooks";
 
+import {tagAtom} from "./_app";
+
 const Home: NextPage = () => {
-  const {data, isError, isLoading} = useImageQuery();
+  const [tag] = useAtom(tagAtom);
+  const {data, isError, isLoading} = useImageQuery((images) => {
+    if (tag === "") return images;
+
+    return images.filter((image) => image.tags.includes(tag));
+  });
 
   return (
     <section className="mx-auto columns-3xs gap-6 max-w-screen-standar pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
