@@ -12,6 +12,13 @@ type LayoutProps = {
 
 export const Layout = ({children}: LayoutProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [label, setLabel] = useState("");
+
+  const handleSubmition: React.FormEventHandler = (e) => {
+    e.preventDefault();
+    if (label.trim().length === 0) return;
+    console.log(label);
+  };
 
   return (
     <div className="flex flex-col justify-between min-h-screen">
@@ -24,16 +31,20 @@ export const Layout = ({children}: LayoutProps) => {
         <nav className="flex h-16 mx-auto max-w-screen-standar items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
           <div className="flex items-center gap-4 mr-auto">
             <Image alt="My unsplash logo" src={unsplashLogo} />
-            <label className="flex items-center gap-2 border-[1px] border-background p-3 text-xs rounded-md">
-              <div className="w-4 h-4">
-                <Image alt="Search Icon" src={searchIcon} />
-              </div>
-              <input
-                className="bg-transparent outline-none"
-                placeholder="Search by name"
-                type="text"
-              />
-            </label>
+            <form onSubmit={handleSubmition}>
+              <label className="flex items-center gap-2 border-[1px] border-background p-3 text-xs rounded-md">
+                <div className="w-4 h-4">
+                  <Image alt="Search Icon" src={searchIcon} />
+                </div>
+                <input
+                  className="bg-transparent outline-none"
+                  placeholder="Search by label"
+                  type="text"
+                  value={label}
+                  onChange={(e) => setLabel(e.target.value)}
+                />
+              </label>
+            </form>
           </div>
           <button
             className="px-4 py-3 text-sm font-semibold text-white rounded-lg shadow-md shadow-primary/50 bg-primary"

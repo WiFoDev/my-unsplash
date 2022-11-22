@@ -4,20 +4,38 @@ import type {NextApiRequest, NextApiResponse} from "next";
 import {AdminAndResourceOptions, v2 as cloudinary} from "cloudinary";
 
 type Resource = {
-  asset_id: string;
   public_id: string;
   format: string;
   version: number;
   resource_type: string;
   type: string;
+  placeholder: boolean;
   created_at: string;
   bytes: number;
   width: number;
   height: number;
-  folder: string;
+  backup: boolean;
+  access_mode: string;
   url: string;
   secure_url: string;
-  tags: string[];
+  tags: Array<string>;
+  context: object;
+  next_cursor: string;
+  derived_next_cursor: string;
+  exif: object;
+  image_metadata: object;
+  faces: number[][];
+  quality_analysis: number;
+  colors: string[][];
+  derived: Array<string>;
+  moderation: object;
+  phash: string;
+  predominant: object;
+  coordinates: object;
+  access_control: Array<string>;
+  pages: number;
+
+  [futureKey: string]: any;
 };
 
 cloudinary.config({
@@ -31,16 +49,24 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Resource[]>,
 ) {
+  const {tag} = req.body;
   const options: AdminAndResourceOptions = {
     type: "upload",
     prefix: "my-unsplash",
     max_results: 500,
     tags: true,
   };
-  const {resources} = await cloudinary.api.resources(options);
+  let resources: Resource[];
+
+  if (tag !== "all") {
+    resources = (await cloudinary.api.resources_by_tag(tag, options))
+      .resources;
+  } else {
+    resources = (await cloudinary.api.resources(options)).resources;
+  }
 
   resources.sort(
-    (a: Resource, b: Resource) =>
+    (a, b) =>
       new Date(b.created_at).getTime() -
       new Date(a.created_at).getTime(),
   );
