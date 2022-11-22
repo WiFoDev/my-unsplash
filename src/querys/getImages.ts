@@ -1,6 +1,6 @@
 export const getImages = async (): Promise<ImageTypes[]> => {
   const results = await fetch(
-    "http://localhost:3000/api/images",
+    `${process.env.NEXT_PUBLIC_API_URL}/api/images`,
   ).then((res) => res.json());
 
   return results;
