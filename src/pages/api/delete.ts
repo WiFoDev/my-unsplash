@@ -10,7 +10,6 @@ cloudinary.config({
 
 const handler: NextApiHandler = async (req, res) => {
   const {public_id} = req.body;
-
   const result = await cloudinary.api.delete_resources([public_id]);
 
   return res.status(200).json({success: true, result});

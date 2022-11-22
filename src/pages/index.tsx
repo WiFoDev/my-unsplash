@@ -15,9 +15,14 @@ const Home: NextPage = () => {
         <p className="text-tertiary">Something went wrong!!</p>
       )}
       {data &&
-        data.map(({secure_url, asset_id, tags}) => {
+        data.map(({secure_url, asset_id, public_id, tags}) => {
           return (
-            <ImageCard key={asset_id} src={secure_url} tags={tags} />
+            <ImageCard
+              key={asset_id}
+              public_id={public_id}
+              src={secure_url}
+              tags={tags}
+            />
           );
         })}
     </section>

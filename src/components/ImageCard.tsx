@@ -1,16 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 import React, {FC, useState} from "react";
 import Image from "next/image";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
 import trashIcon from "@/assets/trash-solid.svg";
+import {deleteImage} from "@/querys";
 
 interface ImageCardProps {
   src: string;
   tags: string[];
+  public_id: string;
 }
 
-export const ImageCard: FC<ImageCardProps> = ({src, tags}) => {
+export const ImageCard: FC<ImageCardProps> = ({
+  src,
+  tags,
+  public_id,
+}) => {
   const [labelOpen, setLabelOpen] = useState(false);
+  const queryClient = useQueryClient();
+  const {mutate} = useMutation({
+    mutationFn: deleteImage,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["images"]});
+    },
+  });
 
   return (
     <div
@@ -21,7 +35,10 @@ export const ImageCard: FC<ImageCardProps> = ({src, tags}) => {
       <img alt="" src={src} />
       {labelOpen && (
         <>
-          <div className="absolute p-1 border-2 rounded-md cursor-pointer top-4 right-4 border-tertiary">
+          <div
+            className="absolute p-1 border-2 rounded-md cursor-pointer top-4 right-4 border-tertiary"
+            onClick={() => mutate({public_id})}
+          >
             <div className="relative w-4 h-4">
               <Image
                 alt="Delete Image Icon"
