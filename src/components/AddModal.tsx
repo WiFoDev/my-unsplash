@@ -4,11 +4,11 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {Portal} from "@/HOC/Portal";
 import {postImage} from "@/querys";
 
-interface ModalProps {
+export interface ModalProps {
   setModalOpenState: (state: boolean) => void;
 }
 
-export const Modal: FC<ModalProps> = ({setModalOpenState}) => {
+export const AddModal: FC<ModalProps> = ({setModalOpenState}) => {
   const [label, setLabel] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const queryClient = useQueryClient();

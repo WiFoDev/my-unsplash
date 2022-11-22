@@ -5,7 +5,7 @@ import {useAtom} from "jotai";
 
 import unsplashLogo from "@/assets/my_unsplash_logo.svg";
 import searchIcon from "@/assets/search-icon.svg";
-import {Modal} from "@/components";
+import {AddModal} from "@/components";
 import {tagAtom} from "@/pages/_app";
 
 type LayoutProps = {
@@ -56,7 +56,7 @@ export const Layout = ({children}: LayoutProps) => {
             Add a photo
           </button>
           {isModalOpen && (
-            <Modal setModalOpenState={setIsModalOpen} />
+            <AddModal setModalOpenState={setIsModalOpen} />
           )}
         </nav>
       </header>
