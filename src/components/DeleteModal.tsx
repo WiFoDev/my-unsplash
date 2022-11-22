@@ -1,5 +1,6 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import React, {FC, FormEventHandler, useState} from "react";
+import {Ring} from "@uiball/loaders";
 
 import {Portal} from "@/HOC/Portal";
 import {deleteImage} from "@/querys";
@@ -19,7 +20,7 @@ export const DeleteModal: FC<DeleteModalProps> = ({
 
   const queryClient = useQueryClient();
 
-  const {mutate, isLoading} = useMutation({
+  const {mutate, isLoading, isSuccess} = useMutation({
     mutationFn: deleteImage,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ["images"]});
@@ -36,12 +37,51 @@ export const DeleteModal: FC<DeleteModalProps> = ({
     mutate({public_id});
   };
 
+  if (isSuccess)
+    return (
+      <Portal>
+        <div className="fixed z-40 grid w-full h-full bg-background/50 backdrop-blur-sm place-items-center">
+          <div className="min-h-[18rem] flex flex-col items-center justify-center w-[39rem] gap-5 bg-white py-6 px-8 rounded-lg">
+            <div className="flex items-center justify-center mx-auto bg-green-100 rounded-full w-14 h-14 dark:bg-primary">
+              <svg
+                aria-hidden="true"
+                className="w-10 h-10 text-white"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </div>
+            <p className="text-xl">Photo Deleted Succesfully!</p>
+            <button
+              className="text-blue-400 underline"
+              onClick={() => setModalOpenState(false)}
+            >
+              Go Home
+            </button>
+          </div>
+        </div>
+      </Portal>
+    );
+
   return (
     <Portal>
       <div className="fixed z-40 grid w-full h-full bg-background/50 backdrop-blur-sm place-items-center">
-        <div className="flex flex-col w-[39rem] gap-5 bg-white py-6 px-8 rounded-lg">
+        <div className="min-h-[16rem] flex flex-col w-[39rem] gap-5 bg-white py-6 px-8 rounded-lg">
           {isLoading ? (
-            <p>Deleting Image...</p>
+            <div className="grid w-full h-[18rem] place-items-center">
+              <Ring
+                color="black"
+                lineWeight={5}
+                size={40}
+                speed={2}
+              />
+            </div>
           ) : (
             <>
               <h2 className="text-xl">Are you sure?</h2>
