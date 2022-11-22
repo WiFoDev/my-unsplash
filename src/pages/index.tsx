@@ -1,6 +1,7 @@
 import type {NextPage} from "next";
 
 import {useAtom} from "jotai";
+import {Waveform} from "@uiball/loaders";
 
 import {ImageCard} from "@/components";
 import {useImageQuery} from "@/Hooks";
@@ -15,9 +16,20 @@ const Home: NextPage = () => {
     return images.filter((image) => image.tags.includes(tag));
   });
 
+  if (isLoading)
+    return (
+      <section className="grid h-full place-items-center">
+        <Waveform
+          color="black"
+          lineWeight={3.5}
+          size={40}
+          speed={1}
+        />
+      </section>
+    );
+
   return (
     <section className="mx-auto columns-3xs gap-6 max-w-screen-standar pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-      {isLoading && <p>Loading...</p>}
       {isError && (
         <p className="text-tertiary">Something went wrong!!</p>
       )}
