@@ -3,8 +3,20 @@ import type {NextApiRequest, NextApiResponse} from "next";
 
 import {AdminAndResourceOptions, v2 as cloudinary} from "cloudinary";
 
-type Data = {
-  name: string;
+type Resource = {
+  asset_id: string;
+  public_id: string;
+  format: string;
+  version: number;
+  resource_type: string;
+  type: string;
+  created_at: string;
+  bytes: number;
+  width: number;
+  height: number;
+  folder: string;
+  url: string;
+  secure_url: string;
 };
 
 cloudinary.config({
@@ -16,15 +28,20 @@ cloudinary.config({
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>,
+  res: NextApiResponse<Resource[]>,
 ) {
   const options: AdminAndResourceOptions = {
     type: "upload",
     prefix: "my-unsplash",
-    direction: -1,
     max_results: 500,
   };
   const {resources} = await cloudinary.api.resources(options);
+
+  resources.sort(
+    (a: Resource, b: Resource) =>
+      new Date(b.created_at).getTime() -
+      new Date(a.created_at).getTime(),
+  );
 
   return res.status(200).json(resources);
 }

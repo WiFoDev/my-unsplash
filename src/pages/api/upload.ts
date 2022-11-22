@@ -15,6 +15,7 @@ export default async function handler(
   const {label, photoURL} = req.body;
   const options: UploadApiOptions = {
     folder: "my-unsplash",
+    tags: [label],
   };
 
   const {secure_url} = await cloudinary.uploader.upload(
