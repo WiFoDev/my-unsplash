@@ -16,14 +16,16 @@ export const DeleteModal: FC<DeleteModalProps> = ({
   public_id,
 }) => {
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
 
   const queryClient = useQueryClient();
 
-  const {mutate, isLoading, isSuccess} = useMutation({
+  const {mutate, isLoading} = useMutation({
     mutationFn: deleteImage,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ["images"]});
+      setSuccess(true);
     },
   });
 
@@ -37,7 +39,7 @@ export const DeleteModal: FC<DeleteModalProps> = ({
     mutate({public_id});
   };
 
-  if (isSuccess)
+  if (success)
     return (
       <Portal>
         <div className="fixed z-40 grid w-full h-full bg-background/50 backdrop-blur-sm place-items-center">
