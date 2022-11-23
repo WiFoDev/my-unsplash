@@ -33,7 +33,7 @@ const Home: NextPage = () => {
       {isError && (
         <p className="text-tertiary">Something went wrong!!</p>
       )}
-      {data &&
+      {data && data.length > 0 ? (
         data.map(({secure_url, asset_id, public_id, tags}) => {
           return (
             <ImageCard
@@ -43,7 +43,12 @@ const Home: NextPage = () => {
               tags={tags}
             />
           );
-        })}
+        })
+      ) : (
+        <div className="absolute inset-x-0 grid w-full text-xl place-items-center">
+          There are no photos with &quot;{tag}&quot; label
+        </div>
+      )}
     </section>
   );
 };
