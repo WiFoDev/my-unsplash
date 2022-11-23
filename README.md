@@ -1,6 +1,6 @@
 <!-- Please update value in the {}  -->
 
-<h1 align="center">{My Unsplash}</h1>
+<h1 align="center">My Unsplash</h1>
 
 <div align="center">
    Solution for a challenge from  <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
@@ -37,7 +37,7 @@
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](https://raw.githubusercontent.com/WiFoDev/my-unsplash/main/my-unsplash.png)
 
 This is an application with unsplash or pinterest style. It was really challenging to build both the frontend with nextjs and the backend that help us to store our image in cloudinary. I try to achieve fully live data app so almost all the functionality contributes to have the most recent server state of the photos.
 
